@@ -19,8 +19,8 @@ jobs:
 
     - name: Commit changes
       run: |
-        git config --global user.name 'ordinary01'
-        git config --global user.email 'jiangdashuai1991@gmail.com'
+        git config --global user.name 'zhuztroy'
+        git config --global user.email 'zhuztroy@foxmail.com'
         git add README.md
         git commit -m "Update target file"
         git push https://${{ secrets.PAT_TOKEN }}@github.com/zhuztroy/workspace.git
