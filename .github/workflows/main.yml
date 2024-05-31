@@ -1,0 +1,28 @@
+name: Update File
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_content:
+        description: 'Content to write to the file'
+        required: true
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Write to file
+      run: echo -e "\n ${{ github.event.inputs.file_content }}" >> README.md
+
+    - name: Commit changes
+      run: |
+        git config --global user.name 'ordinary01'
+        git config --global user.email 'jiangdashuai1991@gmail.com'
+        git add README.md
+        git commit -m "Update target file"
+        git push https://${{ secrets.PAT_TOKEN }}@github.com/zhuztroy/workspace.git
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
